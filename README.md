@@ -1,6 +1,6 @@
 # web-yhk.org
 
-개발 블로그. Next.js App Router 기반 정적 사이트.
+오로지 Claude Code로만 개발한 Next.js App Router 기반의 블로그.
 
 ## 기술 스택
 
