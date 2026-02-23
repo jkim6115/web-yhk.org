@@ -21,7 +21,10 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 - [src/lib/post-loader.ts](src/lib/post-loader.ts) exports:
   - `getAllPosts()` — async, reads all `.md` files, returns sorted list (newest first) with `{ slug, title, created_at, tags }`; cached via `unstable_cache`
   - `getPostData(slug)` — async, parses single post, returns `{ slug, title, created_at, tags, contentHtml }`; cached via `unstable_cache`
-- Post pages at `/posts/[slug]` are statically generated (`generateStaticParams`) async server components that render HTML via `dangerouslySetInnerHTML`
+- Post pages at `/posts/[slug]` are statically generated (`generateStaticParams`) and use `PostBody` (client component) for copy button injection
+- Markdown pipeline: `unified → remarkParse → remarkGfm → remarkRehype → rehypeHighlight → rehypeStringify`
+  - GFM 지원: 테이블, strikethrough, task list 등
+  - 코드 하이라이팅: highlight.js 클래스 출력, CSS 변수 기반 라이트/다크 테마 (`globals.css`)
 - Currently 15 posts in `/posts/`
 
 ### Key Paths
@@ -32,7 +35,8 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 - `src/app/page.tsx` — Home page: tag-filtered, paginated post list (10 per page, `?page=N&tag=T` query params)
 - `src/app/page.module.css` — Post list and pagination styles
 - `src/app/posts/[slug]/page.tsx` — Static post route with `generateStaticParams` and `generateMetadata`
-- `src/app/posts/[slug]/page.module.css` — Post content typography (headings, code, blockquote)
+- `src/app/posts/[slug]/page.module.css` — Post content typography (headings, code, blockquote, table)
+- `src/components/PostBody.tsx` — Client component; `useEffect`로 코드 블록에 복사 버튼 삽입
 - `src/app/sitemap.ts` — Auto-generates `/sitemap.xml` with all post URLs
 - `src/app/robots.ts` — Auto-generates `/robots.txt`
 - `src/components/TagSidebar.tsx` — Tag filter sidebar (links to `/?tag=T`); accepts `allTags` and `activeTag`
@@ -47,6 +51,7 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 - Fonts: Noto Sans KR (body, weights 400/500/700), Noto Sans Mono (code, weight 400) via `next/font/google` with `display: "swap"`
 - Language set to Korean (`lang="ko"` in root layout)
 - CSS custom properties: `--bg`, `--fg`, `--fg-muted`, `--border`, `--accent`, `--code-bg`, `--max-width`
+- `globals.css`: highlight.js 토큰 색상 (`.hljs-*`), 복사 버튼 (`.copy-btn`) 전역 스타일 포함
 - Site domain: `https://web-yhk.org`
 - Root metadata: `title.default: "web-yhk.org"`, `title.template: "%s | web-yhk.org"`, `description: "개발 블로그"`
 - Per-post metadata: title, description (본문 앞 150자), OpenGraph article, JSON-LD BlogPosting 스키마
