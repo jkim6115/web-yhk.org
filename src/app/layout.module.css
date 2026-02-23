@@ -1,0 +1,37 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+}
+
+.headerInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.siteTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+.siteTitle:hover {
+  color: var(--accent);
+}
+
+.main {
+  flex: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
