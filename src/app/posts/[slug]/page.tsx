@@ -16,25 +16,58 @@ export async function generateMetadata({
 }: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const postData = await getPostData(slug);
+  const description = postData.contentHtml
+    .replace(/<[^>]+>/g, "")
+    .slice(0, 150)
+    .trim();
+
   return {
-    title: `${postData.title} | yhk.org`,
+    title: postData.title,
+    description,
+    openGraph: {
+      type: "article",
+      url: `/posts/${slug}`,
+      title: postData.title,
+      description,
+      publishedTime: postData.created_at,
+    },
   };
 }
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const postData = await getPostData(slug);
+  const description = postData.contentHtml
+    .replace(/<[^>]+>/g, "")
+    .slice(0, 150)
+    .trim();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: postData.title,
+    description,
+    datePublished: postData.created_at,
+    author: { "@type": "Person", name: "yhk" },
+    url: `https://web-yhk.org/posts/${slug}`,
+  };
 
   return (
-    <article className={styles.article}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>{postData.title}</h1>
-        <time className={styles.date}>{postData.created_at}</time>
-      </header>
-      <div
-        className={styles.body}
-        dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </article>
+      <article className={styles.article}>
+        <header className={styles.header}>
+          <h1 className={styles.title}>{postData.title}</h1>
+          <time className={styles.date}>{postData.created_at}</time>
+        </header>
+        <div
+          className={styles.body}
+          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+        />
+      </article>
+    </>
   );
 }
