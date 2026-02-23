@@ -7,11 +7,15 @@ import styles from "./layout.module.css";
 const notoSans = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
 });
 
 const notoMono = Noto_Sans_Mono({
   subsets: ["latin"],
   variable: "--font-noto-mono",
+  weight: ["400"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

@@ -14,7 +14,7 @@ export default async function Home({ searchParams }: HomeProps) {
   const activeTag = tag ?? null;
   const currentPage = Math.max(1, parseInt(page ?? "1", 10));
 
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
 
   const allTags = Array.from(
     new Set(allPosts.flatMap((p) => p.tags))

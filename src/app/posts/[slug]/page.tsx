@@ -1,8 +1,24 @@
-import { getPostData } from "@/lib/post-loader";
+import type { Metadata } from "next";
+import { getAllPosts, getPostData } from "@/lib/post-loader";
 import styles from "./page.module.css";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const postData = await getPostData(slug);
+  return {
+    title: `${postData.title} | yhk.org`,
+  };
 }
 
 export default async function PostPage({ params }: PostPageProps) {
