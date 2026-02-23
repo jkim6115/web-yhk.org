@@ -40,6 +40,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    types: {
+      "application/rss+xml": `${BASE_URL}/rss.xml`,
+    },
+  },
 };
 
 export default function RootLayout({

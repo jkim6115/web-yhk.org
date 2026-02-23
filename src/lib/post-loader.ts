@@ -5,9 +5,22 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
+import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import { unstable_cache } from "next/cache";
+
+export type PostHeading = { level: number; text: string; id: string };
+
+function extractHeadings(html: string): PostHeading[] {
+  return [
+    ...html.matchAll(/<h([1-3])[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/g),
+  ].map((m) => ({
+    level: parseInt(m[1], 10),
+    id: m[2],
+    text: m[3].replace(/<[^>]+>/g, "").trim(),
+  }));
+}
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -36,6 +49,7 @@ export const getAllPosts = unstable_cache(
 export const getPostData = unstable_cache(
   async (slug: string) => {
     const fullPath = path.join(postsDirectory, `${slug}.md`);
+    if (!fs.existsSync(fullPath)) return null;
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     const { data, content } = matter(fileContents);
@@ -44,6 +58,7 @@ export const getPostData = unstable_cache(
       .use(remarkParse)
       .use(remarkGfm)
       .use(remarkRehype)
+      .use(rehypeSlug)
       .use(rehypeHighlight)
       .use(rehypeStringify)
       .process(content);
@@ -52,6 +67,7 @@ export const getPostData = unstable_cache(
     return {
       slug,
       contentHtml,
+      headings: extractHeadings(contentHtml),
       title: data.title as string,
       created_at: data.created_at as string,
       tags: (data.tags as string[]) ?? [],

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getAllPosts, getPostData } from "@/lib/post-loader";
 import PostBody from "@/components/PostBody";
+import TableOfContents from "@/components/TableOfContents";
 import styles from "./page.module.css";
 
 interface PostPageProps {
@@ -17,6 +19,7 @@ export async function generateMetadata({
 }: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const postData = await getPostData(slug);
+  if (!postData) notFound();
   const description = postData.contentHtml
     .replace(/<[^>]+>/g, "")
     .slice(0, 150)
@@ -38,6 +41,7 @@ export async function generateMetadata({
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const postData = await getPostData(slug);
+  if (!postData) notFound();
   const description = postData.contentHtml
     .replace(/<[^>]+>/g, "")
     .slice(0, 150)
@@ -59,13 +63,20 @@ export default async function PostPage({ params }: PostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <article className={styles.article}>
-        <header className={styles.header}>
-          <h1 className={styles.title}>{postData.title}</h1>
-          <time className={styles.date}>{postData.created_at}</time>
-        </header>
-        <PostBody html={postData.contentHtml} className={styles.body} />
-      </article>
+      <div className={styles.layout}>
+        <article className={styles.article}>
+          <header className={styles.header}>
+            <h1 className={styles.title}>{postData.title}</h1>
+            <time className={styles.date}>{postData.created_at}</time>
+          </header>
+          <PostBody html={postData.contentHtml} className={styles.body} />
+        </article>
+        <aside className={styles.tocAside}>
+          <div className={styles.tocSticky}>
+            <TableOfContents headings={postData.headings} />
+          </div>
+        </aside>
+      </div>
     </>
   );
 }
