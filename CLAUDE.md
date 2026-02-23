@@ -17,10 +17,10 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 
 ### Content System
 
-- Blog posts are `.md` files in `/posts/` with YAML frontmatter (`title`, `created_at`)
+- Blog posts are `.md` files in `/posts/` with YAML frontmatter (`title`, `created_at`, `tags`)
 - [src/lib/post-loader.ts](src/lib/post-loader.ts) exports:
-  - `getAllPosts()` — reads all `.md` files, returns sorted list (newest first)
-  - `getPostData(slug)` — parses single post, returns `{ slug, title, created_at, contentHtml }`
+  - `getAllPosts()` — reads all `.md` files, returns sorted list (newest first) with `{ slug, title, created_at, tags }`
+  - `getPostData(slug)` — parses single post, returns `{ slug, title, created_at, tags, contentHtml }`
 - Post pages at `/posts/[slug]` are async server components that render HTML via `dangerouslySetInnerHTML`
 - Currently 15 posts in `/posts/`
 
@@ -29,10 +29,12 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 - `src/app/layout.tsx` — Root layout with header (site title link) and `<main>` container
 - `src/app/layout.module.css` — Header and centered container styles (max-width: 680px)
 - `src/app/globals.css` — CSS custom properties for light/dark theme, base typography
-- `src/app/page.tsx` — Home page: paginated post list (10 per page, `?page=N` query param)
+- `src/app/page.tsx` — Home page: tag-filtered, paginated post list (10 per page, `?page=N&tag=T` query params)
 - `src/app/page.module.css` — Post list and pagination styles
 - `src/app/posts/[slug]/page.tsx` — Dynamic post route
 - `src/app/posts/[slug]/page.module.css` — Post content typography (headings, code, blockquote)
+- `src/components/TagSidebar.tsx` — Tag filter sidebar (links to `/?tag=T`); accepts `allTags` and `activeTag`
+- `src/components/TagSidebar.module.css` — Sidebar styles
 - `src/lib/post-loader.ts` — Markdown loading utilities
 - `posts/` — Markdown content files (15 posts)
 
