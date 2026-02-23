@@ -100,3 +100,25 @@
   border: none;
   border-top: 1px solid var(--border);
 }
+
+.body :global(table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.body :global(th),
+.body :global(td) {
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.body :global(th) {
+  background: var(--code-bg);
+  font-weight: 600;
+}
+
+.body :global(tr:nth-child(even) td) {
+  background: var(--code-bg);
+}
