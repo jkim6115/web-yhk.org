@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getAllPosts, getPostData } from "@/lib/post-loader";
+import PostBody from "@/components/PostBody";
 import styles from "./page.module.css";
 
 interface PostPageProps {
@@ -63,10 +64,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <h1 className={styles.title}>{postData.title}</h1>
           <time className={styles.date}>{postData.created_at}</time>
         </header>
-        <div
-          className={styles.body}
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-        />
+        <PostBody html={postData.contentHtml} className={styles.body} />
       </article>
     </>
   );

@@ -56,3 +56,76 @@ pre,
 kbd {
   font-family: var(--font-noto-mono), monospace;
 }
+
+/* ── Syntax Highlighting (highlight.js) ── */
+.hljs { color: #24292e; }
+.hljs-keyword,
+.hljs-operator,
+.hljs-selector-tag { color: #d73a49; }
+.hljs-string,
+.hljs-template-string,
+.hljs-template-literal { color: #032f62; }
+.hljs-comment,
+.hljs-quote { color: #6a737d; font-style: italic; }
+.hljs-number,
+.hljs-literal { color: #005cc5; }
+.hljs-title,
+.hljs-section { color: #6f42c1; }
+.hljs-built_in,
+.hljs-type { color: #005cc5; }
+.hljs-attr,
+.hljs-variable { color: #e36209; }
+.hljs-name,
+.hljs-tag { color: #22863a; }
+.hljs-meta { color: #6a737d; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: bold; }
+
+@media (prefers-color-scheme: dark) {
+  .hljs { color: #c9d1d9; }
+  .hljs-keyword,
+  .hljs-operator,
+  .hljs-selector-tag { color: #ff7b72; }
+  .hljs-string,
+  .hljs-template-string,
+  .hljs-template-literal { color: #a5d6ff; }
+  .hljs-comment,
+  .hljs-quote { color: #8b949e; }
+  .hljs-number,
+  .hljs-literal { color: #79c0ff; }
+  .hljs-title,
+  .hljs-section { color: #d2a8ff; }
+  .hljs-built_in,
+  .hljs-type { color: #79c0ff; }
+  .hljs-attr,
+  .hljs-variable { color: #ffa657; }
+  .hljs-name,
+  .hljs-tag { color: #7ee787; }
+  .hljs-meta { color: #8b949e; }
+}
+
+/* ── Copy Button ── */
+.copy-btn {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.2rem 0.55rem;
+  background: var(--border);
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+pre:hover .copy-btn {
+  opacity: 1;
+}
+
+.copy-btn:hover {
+  background: var(--fg-muted);
+  color: var(--bg);
+}

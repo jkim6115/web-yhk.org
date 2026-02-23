@@ -71,6 +71,7 @@
   overflow-x: auto;
   font-size: 0.875rem;
   line-height: 1.6;
+  position: relative;
 }
 
 .body :global(pre code) {
