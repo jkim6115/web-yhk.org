@@ -48,6 +48,8 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 - `src/components/TableOfContents.module.css` — ToC styles (`.active` 클래스로 현재 섹션 강조)
 - `src/components/TagSidebar.tsx` — Tag filter sidebar (links to `/?tag=T`); accepts `allTags` and `activeTag`
 - `src/components/TagSidebar.module.css` — Sidebar styles
+- `src/components/RelatedPosts.tsx` — Server component; 현재 포스트 하단에 관련 포스트 3개 표시; 공유 태그 수로 점수 계산, 동점 시 최신순 정렬
+- `src/components/RelatedPosts.module.css` — Related posts styles
 - `src/lib/post-loader.ts` — Markdown loading utilities (cached)
 - `posts/` — Markdown content files (15 posts)
 

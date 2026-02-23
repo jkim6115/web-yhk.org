@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getAllPosts, getPostData } from "@/lib/post-loader";
 import PostBody from "@/components/PostBody";
 import TableOfContents from "@/components/TableOfContents";
+import RelatedPosts from "@/components/RelatedPosts";
 import styles from "./page.module.css";
 
 interface PostPageProps {
@@ -40,12 +41,24 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
-  const postData = await getPostData(slug);
+  const [postData, allPosts] = await Promise.all([
+    getPostData(slug),
+    getAllPosts(),
+  ]);
   if (!postData) notFound();
   const description = postData.contentHtml
     .replace(/<[^>]+>/g, "")
     .slice(0, 150)
     .trim();
+
+  const relatedPosts = allPosts
+    .filter((p) => p.slug !== slug)
+    .map((p) => ({
+      ...p,
+      score: p.tags.filter((t) => postData.tags.includes(t)).length,
+    }))
+    .sort((a, b) => b.score - a.score || (a.created_at < b.created_at ? 1 : -1))
+    .slice(0, 3);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -70,6 +83,7 @@ export default async function PostPage({ params }: PostPageProps) {
             <time className={styles.date}>{postData.created_at}</time>
           </header>
           <PostBody html={postData.contentHtml} className={styles.body} />
+          <RelatedPosts posts={relatedPosts} />
         </article>
         <aside className={styles.tocAside}>
           <div className={styles.tocSticky}>
