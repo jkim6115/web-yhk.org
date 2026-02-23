@@ -38,6 +38,7 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 - `src/app/page.module.css` — Post list and pagination styles
 - `src/app/posts/[slug]/page.tsx` — Static post route with `generateStaticParams`, `generateMetadata`, JSON-LD; calls `notFound()` if slug not found
 - `src/app/posts/[slug]/page.module.css` — Post layout (article centered at 680px, ToC absolutely positioned to the right), content typography
+- `src/app/posts/[slug]/opengraph-image.tsx` — Dynamic OG image (1200×630); Noto Sans KR Bold 폰트 로드, 다크 배경에 제목+날짜 렌더링; Next.js가 자동으로 `og:image` 메타태그 추가
 - `src/app/not-found.tsx` + `src/app/not-found.module.css` — Custom 404 page
 - `src/app/rss.xml/route.ts` — RSS 2.0 feed (`/rss.xml`)
 - `src/app/sitemap.ts` — Auto-generates `/sitemap.xml` with all post URLs
