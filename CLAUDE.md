@@ -17,19 +17,24 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 
 ### Content System
 
-- Blog posts are `.md` files in `/posts/` with YAML frontmatter (`title`, `date`)
-- [src/lib/post-loader.ts](src/lib/post-loader.ts) loads and parses posts using `gray-matter` (frontmatter) and `remark`/`remark-html` (markdown → HTML)
-- Currently exports only `getPostData(slug)` — no post listing function yet
-- Post pages at `/posts/[slug]` are async server components that render the HTML via `dangerouslySetInnerHTML`
+- Blog posts are `.md` files in `/posts/` with YAML frontmatter (`title`, `created_at`)
+- [src/lib/post-loader.ts](src/lib/post-loader.ts) exports:
+  - `getAllPosts()` — reads all `.md` files, returns sorted list (newest first)
+  - `getPostData(slug)` — parses single post, returns `{ slug, title, created_at, contentHtml }`
+- Post pages at `/posts/[slug]` are async server components that render HTML via `dangerouslySetInnerHTML`
+- Currently 15 posts in `/posts/`
 
 ### Key Paths
 
-- `src/app/` — App Router pages and layouts
-- `src/app/page.tsx` — Home page (currently default Next.js scaffold, not yet a blog index)
-- `src/app/page.module.css` — Home page styles
+- `src/app/layout.tsx` — Root layout with header (site title link) and `<main>` container
+- `src/app/layout.module.css` — Header and centered container styles (max-width: 680px)
+- `src/app/globals.css` — CSS custom properties for light/dark theme, base typography
+- `src/app/page.tsx` — Home page: paginated post list (10 per page, `?page=N` query param)
+- `src/app/page.module.css` — Post list and pagination styles
 - `src/app/posts/[slug]/page.tsx` — Dynamic post route
+- `src/app/posts/[slug]/page.module.css` — Post content typography (headings, code, blockquote)
 - `src/lib/post-loader.ts` — Markdown loading utilities
-- `posts/` — Markdown content files
+- `posts/` — Markdown content files (15 posts)
 
 ### Configuration
 
@@ -37,5 +42,5 @@ This is a **Next.js 16.1.6 App Router** blog site using file-based markdown cont
 - React Compiler enabled (`reactCompiler: true`) in [next.config.ts](next.config.ts) via `babel-plugin-react-compiler`
 - Fonts: Noto Sans KR (body), Noto Sans Mono (code) via `next/font/google`
 - Language set to Korean (`lang="ko"` in root layout)
-- CSS Modules for component styles; CSS custom properties for light/dark theme in [src/app/globals.css](src/app/globals.css)
-- Layout metadata (`title`, `description`) is still placeholder from create-next-app
+- CSS custom properties: `--bg`, `--fg`, `--fg-muted`, `--border`, `--accent`, `--code-bg`, `--max-width`
+- Metadata: `title: "yhk.org"`, `description: "개발 블로그"`

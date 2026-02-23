@@ -35,3 +35,33 @@
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.pageBtn {
+  font-size: 0.875rem;
+  color: var(--accent);
+  transition: opacity 0.15s;
+}
+
+.pageBtn:hover {
+  opacity: 0.7;
+}
+
+.pageBtnDisabled {
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+  cursor: default;
+}
+
+.pageInfo {
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
