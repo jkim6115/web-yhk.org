@@ -1,6 +1,7 @@
 ---
 title: "React useEffect 완벽 정리"
 created_at: "2026-02-10"
+tags: ["react"]
 ---
 
 `useEffect`는 React에서 가장 많이 쓰이면서도 가장 많이 오용되는 훅이다. 정확히 언제, 어떻게 써야 하는지 정리해봤다.

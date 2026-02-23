@@ -1,6 +1,7 @@
 ---
 title: "웹 성능 최적화: Core Web Vitals 개선하기"
 created_at: "2025-08-05"
+tags: ["seo"]
 ---
 
 Google의 Core Web Vitals는 실제 사용자 경험을 측정하는 지표다. SEO와 직결되기도 하니 무시할 수 없다.

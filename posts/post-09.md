@@ -1,6 +1,7 @@
 ---
 title: "PostgreSQL 인덱스 제대로 이해하기"
 created_at: "2025-11-18"
+tags: ["postgresql", "database"]
 ---
 
 쿼리가 느리다면 십중팔구 인덱스 문제다. 인덱스를 이해하면 데이터베이스 성능을 극적으로 개선할 수 있다.

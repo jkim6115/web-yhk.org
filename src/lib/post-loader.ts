@@ -19,6 +19,7 @@ export function getAllPosts() {
         slug,
         title: data.title as string,
         created_at: data.created_at as string,
+        tags: (data.tags as string[]) ?? [],
       };
     })
     .sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
@@ -38,5 +39,6 @@ export async function getPostData(slug: string) {
     contentHtml,
     title: data.title as string,
     created_at: data.created_at as string,
+    tags: (data.tags as string[]) ?? [],
   };
 }

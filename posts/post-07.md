@@ -1,6 +1,7 @@
 ---
 title: "CSS Grid와 Flexbox, 언제 뭘 써야 할까"
 created_at: "2025-12-20"
+tags: ["css"]
 ---
 
 CSS 레이아웃을 잡을 때 Grid와 Flexbox 사이에서 고민하는 경우가 많다. 둘 다 강력하지만 목적이 다르다.

@@ -1,6 +1,7 @@
 ---
 title: "JavaScript 비동기 처리: callback에서 async/await까지"
 created_at: "2025-09-10"
+tags: ["javascript"]
 ---
 
 JavaScript의 비동기 처리는 언어의 핵심이다. callback 지옥에서 시작해 Promise, 그리고 async/await까지 흐름을 이해하면 코드가 훨씬 명확해진다.

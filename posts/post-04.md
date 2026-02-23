@@ -1,6 +1,7 @@
 ---
 title: "Next.js App Router로 블로그 만들기"
 created_at: "2026-01-28"
+tags: ["nextjs", "react"]
 ---
 
 Pages Router에서 App Router로 넘어온 지 꽤 됐는데, 실제로 써보니 확실히 편한 점이 많다. 이 블로그도 App Router로 만들었는데 구조를 간단히 소개한다.

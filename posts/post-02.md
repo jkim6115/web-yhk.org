@@ -1,6 +1,7 @@
 ---
 title: "TypeScript 제네릭을 제대로 활용하는 법"
 created_at: "2026-02-20"
+tags: ["typescript"]
 ---
 
 TypeScript를 처음 배울 때 제네릭(Generic)은 가장 헷갈리는 개념 중 하나다. `Array<T>`, `Promise<T>` 같은 내장 타입을 쓰면서도 직접 제네릭을 작성하는 건 다른 이야기다.

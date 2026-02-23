@@ -1,6 +1,7 @@
 ---
 title: "Git 브랜치 전략: Git Flow vs GitHub Flow"
 created_at: "2026-01-15"
+tags: ["git", "devops"]
 ---
 
 팀 프로젝트를 시작할 때마다 브랜치 전략을 어떻게 가져갈지 고민하게 된다. 대표적인 두 가지 전략을 비교해봤다.

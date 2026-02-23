@@ -1,6 +1,7 @@
 ---
 title: "GitHub Actions로 CI/CD 파이프라인 구축하기"
 created_at: "2025-09-28"
+tags: ["github-actions", "devops", "ci-cd"]
 ---
 
 매번 직접 배포하는 게 귀찮아서 GitHub Actions를 도입했다. 설정 파일 하나로 테스트, 빌드, 배포를 자동화할 수 있다.

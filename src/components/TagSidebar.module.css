@@ -1,0 +1,35 @@
+.sidebar {
+  width: 160px;
+  flex-shrink: 0;
+  padding-top: 0.125rem;
+}
+
+.tagList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  position: sticky;
+  top: 2rem;
+}
+
+.tagItem,
+.tagItemActive {
+  display: block;
+  font-size: 0.8125rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  color: var(--fg-muted);
+  transition: color 0.15s, background 0.15s;
+}
+
+.tagItem:hover {
+  color: var(--fg);
+  background: var(--code-bg);
+}
+
+.tagItemActive {
+  color: var(--accent);
+  background: var(--code-bg);
+  font-weight: 500;
+}
